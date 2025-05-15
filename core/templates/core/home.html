@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}AtletasBR - Conectando Atletas e Clubes{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Bem-vindo ao AtletasBR!</h1>
+        <p class="lead">A plataforma que conecta atletas talentosos a clubes em busca de novos talentos.</p>
+        <hr class="my-4">
+        <p>Cadastre-se hoje mesmo e comece a construir sua carreira esportiva ou encontre os melhores atletas para o seu clube.</p>
+        <div class="mt-4">
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg mr-2">Cadastre-se</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-lg">Login</a>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Para Atletas</h2>
+                    <p class="card-text">Crie seu perfil, destaque suas habilidades e seja descoberto por clubes de todo o Brasil.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title">Para Clubes</h2>
+                    <p class="card-text">Encontre talentos que se encaixam nas necessidades do seu clube e entre em contato diretamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

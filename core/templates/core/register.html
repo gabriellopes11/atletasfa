@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}Cadastre-se - AtletasBR{% endblock %}
+{% block content %}
+<div class="container mt-5">    <div class="row justify-content-center">
+        <div class="col-md-8">            <div class="card">
+                <div class="card-header bg-primary text-white">                    <h3 class="mb-0">Cadastre-se no AtletasBR</h3>
+                </div>                <div class="card-body">
+                    <form method="post" novalidate>                        {% csrf_token %}
+                                                {% if form.non_field_errors %}
+                        <div class="alert alert-danger">                            {% for error in form.non_field_errors %}
+                                {{ error }}                            {% endfor %}
+                        </div>                        {% endif %}
+                                                <div class="mb-3">
+                            <label for="{{ form.username.id_for_label }}" class="form-label">Nome de usuário</label>                            {{ form.username }}
+                            {% if form.username.errors %}                            <div class="text-danger">
+                                {% for error in form.username.errors %}                                    {{ error }}
+                                {% endfor %}                            </div>
+                            {% endif %}                            <div class="form-text">Obrigatório. 150 caracteres ou menos. Letras, números e @/./+/-/_ apenas.</div>
+                        </div>                        
+                        <div class="mb-3">                            <label for="{{ form.email.id_for_label }}" class="form-label">E-mail</label>
+                            {{ form.email }}                            {% if form.email.errors %}
+                            <div class="text-danger">                                {% for error in form.email.errors %}
+                                    {{ error }}                                {% endfor %}
+                            </div>                            {% endif %}
+                        </div>                        
+                        <div class="mb-3">                            <label for="{{ form.password1.id_for_label }}" class="form-label">Senha</label>
+                            {{ form.password1 }}                            {% if form.password1.errors %}
+                            <div class="text-danger">                                {% for error in form.password1.errors %}
+                                    {{ error }}                                {% endfor %}
+                            </div>                            {% endif %}
+                            <div class="form-text">                                <ul>
+                                    <li>Sua senha não pode ser muito parecida com suas outras informações pessoais.</li>                                    <li>Sua senha precisa conter pelo menos 8 caracteres.</li>
+                                    <li>Sua senha não pode ser uma senha comumente utilizada.</li>                                    <li>Sua senha não pode ser inteiramente numérica.</li>
+                                </ul>                            </div>
+                        </div>                        
+                        <div class="mb-3">                            <label for="{{ form.password2.id_for_label }}" class="form-label">Confirme a senha</label>
+                            {{ form.password2 }}                            {% if form.password2.errors %}
+                            <div class="text-danger">                                {% for error in form.password2.errors %}
+                                    {{ error }}                                {% endfor %}
+                            </div>                            {% endif %}
+                            <div class="form-text">Digite a mesma senha de antes, para verificação.</div>                        </div>
+                                                <div class="mb-3">
+                            <div class="form-check">                                {{ form.is_athlete }}
+                                <label class="form-check-label" for="{{ form.is_athlete.id_for_label }}">                                    Sou um atleta
+                                </label>                            </div>
+                        </div>                        
+                        <div class="mb-3">                            <div class="form-check">
+                                {{ form.is_club }}                                <label class="form-check-label" for="{{ form.is_club.id_for_label }}">
+                                    Represento um clube                                </label>
+                            </div>                        </div>
+                                                <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>                        </div>
+                    </form>                </div>
+                <div class="card-footer text-center">                    <p class="mb-0">Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
+                </div>            </div>
+        </div>    </div>
+</div>{% endblock %}
+{% block extra_js %}
+<script>    // Adiciona classes do Bootstrap aos campos do formulário
+    document.addEventListener('DOMContentLoaded', function() {        const formFields = document.querySelectorAll('input, select, textarea');
+        formFields.forEach(field => {            if (field.type === 'checkbox') {
+                field.classList.add('form-check-input');            } else {
+                field.classList.add('form-control');            }
+        });    });
+</script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

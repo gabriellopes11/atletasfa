@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Editar Perfil{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Editar Perfil</h4>
+                    <a href="{% url 'dashboard' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-arrow-left me-1"></i>Voltar
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-4">
+                                <div class="text-center mb-3">
+                                    {% if profile.photo %}
+                                        <img src="{{ profile.photo.url }}" class="img-fluid rounded mb-3" alt="{{ profile.full_name }}" style="max-height: 200px;">
+                                        <p class="small text-muted">Foto atual</p>
+                                    {% else %}
+                                        <div class="bg-light rounded p-4 mb-3">
+                                            <i class="fas fa-user-circle fa-5x text-secondary"></i>
+                                        </div>
+                                        <p class="small text-muted">Sem foto de perfil</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <label for="{{ form.photo.id_for_label }}" class="form-label">Foto de Perfil</label>
+                                    {{ form.photo }}
+                                    {% if form.photo.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.photo.errors }}
+                                        </div>
+                                    {% endif %}
+                                    <div class="form-text small text-muted">
+                                        Formatos aceitos: JPG, PNG. Tamanho máximo: 5MB.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.full_name.id_for_label }}" class="form-label">Nome Completo</label>
+                            {{ form.full_name }}
+                            {% if form.full_name.errors %}
+                                <div class="text-danger small">
+                                    {{ form.full_name.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="{{ form.age.id_for_label }}" class="form-label">Idade</label>
+                                    {{ form.age }}
+                                    {% if form.age.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.age.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="{{ form.height.id_for_label }}" class="form-label">Altura (m)</label>
+                                    {{ form.height }}
+                                    {% if form.height.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.height.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="{{ form.weight.id_for_label }}" class="form-label">Peso (kg)</label>
+                                    {{ form.weight }}
+                                    {% if form.weight.errors %}
+                                        <div class="text-danger small">
+                                            {{ form.weight.errors }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.position.id_for_label }}" class="form-label">Posição</label>
+                            {{ form.position }}
+                            {% if form.position.errors %}
+                                <div class="text-danger small">
+                                    {{ form.position.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="{{ form.bio.id_for_label }}" class="form-label">Biografia</label>
+                            {{ form.bio }}
+                            {% if form.bio.errors %}
+                                <div class="text-danger small">
+                                    {{ form.bio.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text small text-muted">
+                                Conte um pouco sobre sua carreira, conquistas e objetivos.
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="{{ form.video_link.id_for_label }}" class="form-label">Link de Vídeo Destaque</label>
+                            {{ form.video_link }}
+                            {% if form.video_link.errors %}
+                                <div class="text-danger small">
+                                    {{ form.video_link.errors }}
+                                </div>
+                            {% endif %}
+                            <div class="form-text small text-muted">
+                                Cole aqui o link do YouTube com seu vídeo de destaque.
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i>Salvar Alterações
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    return render(request, 'core/post_video.html', {'form': form})
+{% endblock %}

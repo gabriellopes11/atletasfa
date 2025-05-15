@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Dashboard do Atleta{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Coluna do perfil -->
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Meu Perfil</h4>
+                </div>
+                <div class="card-body">
+                    {% if profile.photo %}
+                        <img src="{{ profile.photo.url }}" class="img-fluid rounded mb-3" alt="{{ profile.full_name }}">
+                    {% else %}
+                        <div class="text-center mb-3">
+                            <i class="fas fa-user-circle fa-5x text-secondary"></i>
+                        </div>
+                    {% endif %}
+                    
+                    <h5>{{ profile.full_name|default:"Complete seu perfil" }}</h5>
+                    <p><strong>Posição:</strong> {{ profile.position|default:"Não informado" }}</p>
+                    <p><strong>Altura:</strong> {{ profile.height|default:"Não informado" }} m</p>
+                    <p><strong>Peso:</strong> {{ profile.weight|default:"Não informado" }} kg</p>
+                    <p><strong>Idade:</strong> {{ profile.age|default:"Não informado" }} anos</p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ações rápidas -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Ações Rápidas</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'post_video' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-video me-2"></i>Postar Novo Vídeo
+                        </a>
+                        <a href="{% url 'inbox' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-envelope me-2"></i>Ver Mensagens
+                        </a>
+                        <a href="{% url 'user_list' %}" class="btn btn-outline-primary">
+                            <i class="fas fa-users me-2"></i>Explorar Usuários
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Coluna principal -->
+        <div class="col-md-8">
+            <!-- Seção de vídeos -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Meus Vídeos</h4>
+                    <a href="{% url 'video_create' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus me-1"></i>Novo Vídeo
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if user.videos.all %}
+                        <div class="row">
+                            {% for video in user.videos.all %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        {% if video.thumbnail %}
+                                            <img src="{{ video.thumbnail.url }}" class="card-img-top" alt="{{ video.title }}">
+                                        {% else %}
+                                            <div class="bg-light text-center py-5">
+                                                <i class="fas fa-video fa-3x text-secondary"></i>
+                                            </div>
+                                        {% endif %}
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ video.title }}</h5>
+                                            <p class="card-text small text-muted">{{ video.created_at|date:"d/m/Y" }}</p>
+                                            <a href="{% url 'video_detail' video.pk %}" class="btn btn-sm btn-outline-primary">Ver Detalhes</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{% url 'video_list' %}" class="btn btn-outline-primary">Ver todos os vídeos</a>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-film fa-3x text-muted mb-3"></i>
+                            <p>Você ainda não possui vídeos publicados.</p>
+                            <a href="{% url 'post_video' %}" class="btn btn-primary">Publicar meu primeiro vídeo</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <!-- Seção de mensagens -->
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Mensagens Recentes</h4>
+                    <a href="{% url 'inbox' %}" class="btn btn-light btn-sm">
+                        <i class="fas fa-envelope me-1"></i>Caixa de Entrada
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if user.received_messages.all %}
+                        <div class="list-group">
+                            {% for message in user.received_messages.all|slice:":5" %}
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <h6 class="mb-1">De: {{ message.sender.username }}</h6>
+                                        <small>{{ message.timestamp|date:"d/m/Y H:i" }}</small>
+                                    </div>
+                                    <p class="mb-1">{{ message.content|truncatechars:100 }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{% url 'inbox' %}" class="btn btn-outline-primary">Ver todas as mensagens</a>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-envelope fa-3x text-muted mb-3"></i>
+                            <p>Você não possui mensagens.</p>
+                            <p class="mt-2">
+                                <a href="{% url 'user_list' %}" class="btn btn-outline-primary">Encontrar usuários para conversar</a>
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

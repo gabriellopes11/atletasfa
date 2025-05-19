@@ -3,138 +3,398 @@
 
 {% block title %}Dashboard do Atleta{% endblock %}
 
+{% block extra_css %}
+<!-- Chart.js para gráficos avançados -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <div class="row">
-        <!-- Coluna do perfil -->
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Meu Perfil</h4>
+<!-- Container principal com fundo escuro gradiente -->
+<div class="dashboard-container">
+    <!-- Cabeçalho do dashboard com estatísticas rápidas -->
+    <div class="dashboard-header mb-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="text-light mb-0">
+                        <i class="fas fa-tachometer-alt text-danger me-2"></i>Dashboard
+                        <span class="badge bg-danger ms-2">Atleta</span>
+                    </h2>
+                    <p class="text-light opacity-75 mb-0">Bem-vindo de volta, {{ profile.full_name|default:"Atleta" }}</p>
                 </div>
-                <div class="card-body">
-                    {% if profile.photo %}
-                        <img src="{{ profile.photo.url }}" class="img-fluid rounded mb-3" alt="{{ profile.full_name }}">
-                    {% else %}
-                        <div class="text-center mb-3">
-                            <i class="fas fa-user-circle fa-5x text-secondary"></i>
+                <div class="col-md-6">
+                    <div class="row stats-counters">
+                        <!-- Contador de vídeos -->
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-video text-danger"></i></div>
+                                <div class="stat-value">{{ user.videos.count }}</div>
+                                <div class="stat-label">Vídeos</div>
+                            </div>
                         </div>
-                    {% endif %}
-                    
-                    <h5>{{ profile.full_name|default:"Complete seu perfil" }}</h5>
-                    <p><strong>Posição:</strong> {{ profile.position|default:"Não informado" }}</p>
-                    <p><strong>Altura:</strong> {{ profile.height|default:"Não informado" }} m</p>
-                    <p><strong>Peso:</strong> {{ profile.weight|default:"Não informado" }} kg</p>
-                    <p><strong>Idade:</strong> {{ profile.age|default:"Não informado" }} anos</p>
-                    
-                    <div class="d-grid gap-2">
-                        <a href="{% url 'edit_profile' %}" class="btn btn-primary">Editar Perfil</a>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Ações rápidas -->
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Ações Rápidas</h4>
-                </div>
-                <div class="card-body">
-                    <div class="d-grid gap-2">
-                        <a href="{% url 'post_video' %}" class="btn btn-outline-primary">
-                            <i class="fas fa-video me-2"></i>Postar Novo Vídeo
-                        </a>
-                        <a href="{% url 'inbox' %}" class="btn btn-outline-primary">
-                            <i class="fas fa-envelope me-2"></i>Ver Mensagens
-                        </a>
-                        <a href="{% url 'user_list' %}" class="btn btn-outline-primary">
-                            <i class="fas fa-users me-2"></i>Explorar Usuários
-                        </a>
+                        <!-- Contador de mensagens -->
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-envelope text-danger"></i></div>
+                                <div class="stat-value">{{ user.received_messages.count }}</div>
+                                <div class="stat-label">Mensagens</div>
+                            </div>
+                        </div>
+                        <!-- Contador de visualizações -->
+                        <div class="col-4">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i class="fas fa-eye text-danger"></i></div>
+                                <div class="stat-value">{{ total_views|default:"0" }}</div>
+                                <div class="stat-label">Visualizações</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Coluna principal -->
-        <div class="col-md-8">
-            <!-- Seção de vídeos -->
-            <div class="card mb-4">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Meus Vídeos</h4>
-                    <a href="{% url 'video_create' %}" class="btn btn-light btn-sm">
-                        <i class="fas fa-plus me-1"></i>Novo Vídeo
-                    </a>
-                </div>
-                <div class="card-body">
-                    {% if user.videos.all %}
-                        <div class="row">
-                            {% for video in user.videos.all %}
-                                <div class="col-md-6 mb-4">
-                                    <div class="card h-100">
-                                        {% if video.thumbnail %}
-                                            <img src="{{ video.thumbnail.url }}" class="card-img-top" alt="{{ video.title }}">
-                                        {% else %}
-                                            <div class="bg-light text-center py-5">
-                                                <i class="fas fa-video fa-3x text-secondary"></i>
-                                            </div>
-                                        {% endif %}
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ video.title }}</h5>
-                                            <p class="card-text small text-muted">{{ video.created_at|date:"d/m/Y" }}</p>
-                                            <a href="{% url 'video_detail' video.pk %}" class="btn btn-sm btn-outline-primary">Ver Detalhes</a>
-                                        </div>
-                                    </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Coluna do perfil -->
+            <div class="col-md-4">
+                <!-- Card de perfil com tema escuro e design moderno -->
+                <div class="card mb-4 bg-dark text-light border-0 profile-card">
+                    <!-- Cabeçalho com gradiente -->
+                    <div class="card-header profile-header">
+                        <h4 class="mb-0"><i class="fas fa-user-circle me-2"></i>Meu Perfil</h4>
+                    </div>
+                    <div class="card-body bg-dark">
+                        <div class="profile-image-container">
+                            {% if profile.photo %}
+                                <!-- Foto do perfil com efeito de borda iluminada -->
+                                <img src="{{ profile.photo.url }}" class="profile-image" alt="{{ profile.full_name }}">
+                            {% else %}
+                                <!-- Ícone placeholder com efeito de gradiente -->
+                                <div class="profile-image-placeholder">
+                                    <i class="fas fa-user"></i>
                                 </div>
-                            {% endfor %}
+                            {% endif %}
                         </div>
-                        <div class="text-center mt-3">
-                            <a href="{% url 'video_list' %}" class="btn btn-outline-primary">Ver todos os vídeos</a>
+                        
+                        <!-- Informações do perfil com estilo moderno -->
+                        <h5 class="text-light text-center mt-3">{{ profile.full_name|default:"Complete seu perfil" }}</h5>
+                        
+                        <!-- Estatísticas físicas com barras de progresso -->
+                        <div class="physical-stats mt-4">
+                            <div class="stat-item">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-light">Altura</span>
+                                    <span class="text-danger">{{ profile.height|default:"0" }} m</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item mt-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-light">Peso</span>
+                                    <span class="text-danger">{{ profile.weight|default:"0" }} kg</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">    
+                                </div>
+                            </div>
+                            
+                            <div class="stat-item mt-3">
+                                <div class="d-flex justify-content-between mb-1">
+                                    <span class="text-light">Idade</span>
+                                    <span class="text-danger">{{ profile.age|default:"0" }} anos</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                </div>
+                            </div>
+                            
+                            <div class="position-badge mt-4 text-center">
+                                <span class="badge bg-gradient-red">{{ profile.position|default:"Posição não definida" }}</span>
+                            </div>
                         </div>
-                    {% else %}
-                        <div class="text-center py-5">
-                            <i class="fas fa-film fa-3x text-muted mb-3"></i>
-                            <p>Você ainda não possui vídeos publicados.</p>
-                            <a href="{% url 'post_video' %}" class="btn btn-primary">Publicar meu primeiro vídeo</a>
+                        
+                        <!-- Botão de editar perfil com efeito de brilho -->
+                        <div class="d-grid gap-2 mt-4">
+                            <a href="{% url 'edit_profile' %}" class="btn btn-glow">
+                                <i class="fas fa-user-edit me-2"></i>Editar Perfil
+                            </a>
                         </div>
-                    {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Ações rápidas com tema escuro e ícones animados -->
+                <div class="card mb-4 bg-dark text-light border-0 action-card">
+                    <div class="card-header action-header">
+                        <h4 class="mb-0"><i class="fas fa-bolt me-2"></i>Ações Rápidas</h4>
+                    </div>
+                    <div class="card-body bg-dark">
+                        <div class="d-grid gap-3">
+                            <!-- Botões com efeitos de hover avançados -->
+                            <a href="{% url 'post_video' %}" class="btn btn-action">
+                                <div class="btn-icon"><i class="fas fa-video"></i></div>
+                                <div class="btn-text">Postar Novo Vídeo</div>
+                                <div class="btn-arrow"><i class="fas fa-chevron-right"></i></div>
+                            </a>
+                            <a href="{% url 'inbox' %}" class="btn btn-action">
+                                <div class="btn-icon"><i class="fas fa-envelope"></i></div>
+                                <div class="btn-text">Ver Mensagens</div>
+                                <div class="btn-arrow"><i class="fas fa-chevron-right"></i></div>
+                            </a>
+                            <a href="{% url 'user_list' %}" class="btn btn-action">
+                                <div class="btn-icon"><i class="fas fa-users"></i></div>
+                                <div class="btn-text">Explorar Usuários</div>
+                                <div class="btn-arrow"><i class="fas fa-chevron-right"></i></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráfico de atividade -->
+                <div class="card bg-dark text-light border-0 chart-card">
+                    <div class="card-header chart-header">
+                        <h4 class="mb-0"><i class="fas fa-chart-line me-2"></i>Atividade</h4>
+                    </div>
+                    <div class="card-body bg-dark">
+                        <canvas id="activityChart" height="200"></canvas>
+                    </div>
                 </div>
             </div>
             
-            <!-- Seção de mensagens -->
-            <div class="card">
-                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Mensagens Recentes</h4>
-                    <a href="{% url 'inbox' %}" class="btn btn-light btn-sm">
-                        <i class="fas fa-envelope me-1"></i>Caixa de Entrada
-                    </a>
-                </div>
-                <div class="card-body">
-                    {% if user.received_messages.all %}
-                        <div class="list-group">
-                            {% for message in user.received_messages.all|slice:":5" %}
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between">
-                                        <h6 class="mb-1">De: {{ message.sender.username }}</h6>
-                                        <small>{{ message.timestamp|date:"d/m/Y H:i" }}</small>
+            <!-- Coluna principal -->
+            <div class="col-md-8">
+                <!-- Seção de vídeos com tema escuro e cards modernos -->
+                <div class="card mb-4 bg-dark text-light border-0 video-card">
+                    <div class="card-header video-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0"><i class="fas fa-film me-2"></i>Meus Vídeos</h4>
+                        <a href="{% url 'video_create' %}" class="btn btn-sm btn-create">
+                            <i class="fas fa-plus me-1"></i>Novo Vídeo
+                        </a>
+                    </div>
+                    <div class="card-body bg-dark">
+                        {% if user.videos.all %}
+                            <div class="row">
+                                {% for video in user.videos.all %}
+                                    <div class="col-md-6 mb-4">
+                                        <!-- Cards de vídeo com efeitos modernos -->
+                                        <div class="video-item">
+                                            <div class="video-thumbnail">
+                                                {% if video.thumbnail %}
+                                                    <img src="{{ video.thumbnail.url }}" alt="{{ video.title }}">
+                                                {% else %}
+                                                    <div class="video-placeholder">
+                                                        <i class="fas fa-video"></i>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="video-overlay">
+                                                    <a href="{% url 'video_detail' video.pk %}" class="btn-play">
+                                                        <i class="fas fa-play"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="video-info">
+                                                <h5 class="video-title">{{ video.title }}</h5>
+                                                <div class="video-meta">
+                                                    <span><i class="far fa-calendar-alt me-1"></i>{{ video.created_at|date:"d/m/Y" }}</span>
+                                                    <span><i class="far fa-eye me-1"></i>{{ video.views|default:"0" }}</span>
+                                                </div>
+                                                <a href="{% url 'video_detail' video.pk %}" class="btn btn-sm btn-outline-danger mt-2">Ver Detalhes</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p class="mb-1">{{ message.content|truncatechars:100 }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="{% url 'video_list' %}" class="btn btn-see-all">Ver todos os vídeos</a>
+                            </div>
+                        {% else %}
+                            <!-- Estado vazio com ilustração moderna -->
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-film"></i>
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <div class="text-center mt-3">
-                            <a href="{% url 'inbox' %}" class="btn btn-outline-primary">Ver todas as mensagens</a>
-                        </div>
-                    {% else %}
-                        <div class="text-center py-4">
-                            <i class="fas fa-envelope fa-3x text-muted mb-3"></i>
-                            <p>Você não possui mensagens.</p>
-                            <p class="mt-2">
-                                <a href="{% url 'user_list' %}" class="btn btn-outline-primary">Encontrar usuários para conversar</a>
-                            </p>
-                        </div>
-                    {% endif %}
+                                <h5 class="empty-title">Sem vídeos publicados</h5>
+                                <p class="empty-desc">Compartilhe seus melhores momentos com olheiros e clubes.</p>
+                                <a href="{% url 'post_video' %}" class="btn btn-glow mt-3">
+                                    <i class="fas fa-plus me-2"></i>Publicar meu primeiro vídeo
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <!-- Seção de mensagens com tema escuro e design moderno -->
+                <div class="card bg-dark text-light border-0 message-card">
+                    <div class="card-header message-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0"><i class="fas fa-envelope me-2"></i>Mensagens Recentes</h4>
+                        <a href="{% url 'inbox' %}" class="btn btn-sm btn-create">
+                            <i class="fas fa-inbox me-1"></i>Caixa de Entrada
+                        </a>
+                    </div>
+                    <div class="card-body bg-dark">
+                        {% if user.received_messages.all %}
+                            <div class="message-list">
+                                {% for message in user.received_messages.all|slice:":5" %}
+                                    <!-- Itens de mensagem com design moderno -->
+                                    <div class="message-item">
+                                        <div class="message-avatar">
+                                            {% if message.sender.profile.photo %}
+                                                <img src="{{ message.sender.profile.photo.url }}" alt="{{ message.sender.username }}">
+                                            {% else %}
+                                                <div class="avatar-placeholder">
+                                                    {{ message.sender.username|first|upper }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="message-content">
+                                            <div class="message-header">
+                                                <h6 class="message-sender">{{ message.sender.username }}</h6>
+                                                <span class="message-time">{{ message.timestamp|date:"d/m/Y H:i" }}</span>
+                                            </div>
+                                            <p class="message-text">{{ message.content|truncatechars:100 }}</p>
+                                            <a href="{% url 'message_detail' message.id %}" class="message-link">Ler mensagem</a>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="text-center mt-3">
+                                <a href="{% url 'inbox' %}" class="btn btn-see-all">Ver todas as mensagens</a>
+                            </div>
+                        {% else %}
+                            <!-- Estado vazio com ilustração moderna -->
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <h5 class="empty-title">Sem mensagens</h5>
+                                <p class="empty-desc">Conecte-se com outros atletas e olheiros.</p>
+                                <a href="{% url 'user_list' %}" class="btn btn-glow mt-3">
+                                    <i class="fas fa-users me-2"></i>Encontrar usuários
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
+
+<!-- Estilos personalizados para o tema escuro avançado -->
+<style>
+    /* Estilos gerais e variáveis */
+    :root {
+        --dark-bg: #121212;
+        --card-bg: #1e1e1e;
+        --card-darker: #181818;
+        --accent-red: #dc3545;
+        --accent-red-dark: #bb2d3b;
+        --accent-red-light: #e05c6e;
+        --text-light: #e0e0e0;
+        --text-muted: #a0a0a0;
+        --border-dark: #2c2c2c;
+    }
+    
+    /* Estilo para o fundo da página com gradiente sutil */
+    body {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1a1a 100%) !important;
+        color: var(--text-light) !important;
+        min-height: 100vh;
+    }
+    
+    /* Dashboard container */
+    .dashboard-container {
+        padding-bottom: 3rem;
+    }
+    
+    /* Cabeçalho do dashboard */
+    .dashboard-header {
+        background: linear-gradient(90deg, #1a1a1a 0%, #2c2c2c 100%);
+        padding: 1.5rem 0;
+        border-bottom: 1px solid var(--border-dark);
+        margin-bottom: 2rem;
+    }
+    
+    /* Contadores de estatísticas */
+    .stats-counters {
+        text-align: center;
+    }
+    
+    .stat-card {
+        background: rgba(30, 30, 30, 0.5);
+        border-radius: 10px;
+        padding: 0.8rem 0.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stat-icon {
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+    }
+    
+    .stat-label {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+    }
+    
+    /* Cards com estilo avançado */
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Cabeçalhos de cards com gradientes */
+    .profile-header {
+        background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-red-dark) 100%);
+        color: white;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    .action-header {
+        background: linear-gradient(90deg, #343a40 0%, #212529 100%);
+        color: white;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    .video-header {
+        background: linear-gradient(90deg, var(--accent-red) 0%, var(--accent-red-dark) 100%);
+        color: white;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    .message-header {
+        background: linear-gradient(90deg, #343a40 0%, #212529 100%);
+        color: white;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    .chart-header {
+        background: linear-gradient(90deg, #343a40 0%, #212529 100%);
+        color: white;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    /* Imagem de perfil estilizada */
+    .profile-image-container {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .profile-image
+
+
+</style>
+{% endblock %} 

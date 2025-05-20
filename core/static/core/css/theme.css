@@ -1,0 +1,65 @@
+:root {
+    --primary-red: #e60000;
+    --dark-red: #b30000;
+    --black: #121212;
+    --dark-gray: #1e1e1e;
+    --light-gray: #e0e0e0;
+}
+
+/* Fundo escuro para contraste */
+body {
+    background-color: var(--black);
+    color: var(--light-gray);
+}
+
+/* Estilizando o jumbotron com gradiente vermelho e preto */
+.jumbotron {
+    background: linear-gradient(135deg, var(--black) 0%, var(--dark-red) 100%);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Botões estilizados */
+.btn-primary {
+    background-color: var(--primary-red);
+    border-color: var(--primary-red);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-red);
+    border-color: var(--dark-red);
+}
+
+.btn-outline-secondary {
+    color: white;
+    border-color: white;
+}
+
+/* Cards com bordas vermelhas */
+.card {
+    background-color: var(--dark-gray);
+    border: 1px solid var(--primary-red);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    color: var(--primary-red);
+}
+
+/* Estilizando a navbar */
+.navbar-dark.bg-primary {
+    background-color: var(--dark-red) !important;
+}
+
+/* Estilizando o footer */
+footer {
+    background-color: var(--dark-gray) !important;
+    color: var(--light-gray) !important;
+    border-top: 1px solid var(--primary-red);
+}
+
+.bg-custom-red {
+    background-color: #ff0000; /* Vermelho puro, mais forte */
+    color: white;
+}

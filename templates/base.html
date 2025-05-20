@@ -1,17 +1,57 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AtletasBR{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
+    <!-- Tema personalizado vermelho e preto -->
+    <link href="{% static 'core/css/theme.css' %}" rel="stylesheet">
+    <!-- CSS personalizado adicional -->
     {% block extra_css %}{% endblock %}
+    <style>
+        /* Variáveis de cores principais */
+        :root {
+            --primary-red: #e60000;
+            --dark-red: #b30000;
+            --black: #121212;
+            --dark-gray: #1e1e1e;
+            --light-gray: #e0e0e0;
+        }
+        
+        /* Fundo escuro para toda a página */
+        body {
+            background-color: var(--black);
+            color: var(--light-gray);
+        }
+        
+        /* Navbar com tema vermelho */
+        .navbar {
+            background-color: var(--dark-red) !important;
+        }
+        
+        /* Links da navbar */
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: white;
+        }
+        
+        /* Footer com tema escuro */
+        footer {
+            background-color: var(--dark-gray) !important;
+            color: var(--light-gray) !important;
+            border-top: 1px solid var(--primary-red);
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">AtletasBR</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -45,7 +85,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-light py-4 mt-5">
+    <footer class="py-4 mt-5">
         <div class="container text-center">
             <p>&copy; 2025 AtletasBR - Todos os direitos reservados</p>
         </div>

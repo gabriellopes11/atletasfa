@@ -5,73 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AtletasBR{% endblock %}</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Tema personalizado vermelho e preto -->
     <link href="{% static 'core/css/theme.css' %}" rel="stylesheet">
     <!-- CSS personalizado adicional -->
     {% block extra_css %}{% endblock %}
-    <style>
-        /* Variáveis de cores principais */
-        :root {
-            --primary-red: #e60000;
-            --dark-red: #b30000;
-            --black: #121212;
-            --dark-gray: #1e1e1e;
-            --light-gray: #e0e0e0;
-        }
-        
-        /* Fundo escuro para toda a página */
-        body {
-            background-color: var(--black);
-            color: var(--light-gray);
-        }
-        
-        /* Navbar com tema vermelho */
-        .navbar {
-            background-color: var(--dark-red) !important;
-        }
-        
-        /* Links da navbar */
-        .navbar-dark .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.85);
-        }
-        
-        .navbar-dark .navbar-nav .nav-link:hover {
-            color: white;
-        }
-        
-        /* Footer com tema escuro */
-        footer {
-            background-color: var(--dark-gray) !important;
-            color: var(--light-gray) !important;
-            border-top: 1px solid var(--primary-red);
-        }
-    </style>
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}">AtletasBR</a>
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <i class="fas fa-football me-2"></i>
+                <span>AtletasBR</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-home me-1"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search me-1"></i> Explorar
+                        </a>
+                    </li>
                     {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                            <a class="nav-link" href="{% url 'dashboard' %}">
+                                <i class="fas fa-tachometer-alt me-1"></i> Dashboard
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Sair</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user-circle me-1"></i> Conta
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Perfil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Configurações</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt me-2"></i>Sair</a></li>
+                            </ul>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                            <a class="nav-link" href="{% url 'login' %}">
+                                <i class="fas fa-sign-in-alt me-1"></i> Login
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">Cadastre-se</a>
+                            <a class="nav-link btn btn-sm btn-primary ms-2 px-3 py-1 mt-1" href="{% url 'register' %}">
+                                <i class="fas fa-user-plus me-1"></i> Cadastre-se
+                            </a>
                         </li>
                     {% endif %}
                 </ul>
@@ -86,14 +82,78 @@
 
     <!-- Footer -->
     <footer class="py-4 mt-5">
-        <div class="container text-center">
-            <p>&copy; 2025 AtletasBR - Todos os direitos reservados</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-4"><i class="fas fa-football me-2"></i>AtletasBR</h5>
+                    <p class="mb-3">Conectando atletas talentosos a clubes em busca de novos talentos no futebol americano brasileiro.</p>
+                    <div class="social-icons">
+                        <a href="#" class="me-3 text-light"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-3 text-light"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-3 text-light"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4 mb-md-0">
+                    <h6 class="text-uppercase mb-3">Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{% url 'home' %}" class="text-light">Início</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">Sobre nós</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">Contato</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4 mb-md-0">
+                    <h6 class="text-uppercase mb-3">Recursos</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light">Atletas</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">Clubes</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">Eventos</a></li>
+                        <li class="mb-2"><a href="#" class="text-light">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6 class="text-uppercase mb-3">Contato</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>São Paulo, SP</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i>contato@atletasbr.com</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i>(11) 99999-9999</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 AtletasBR - Todos os direitos reservados</p>
+            </div>
         </div>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JS personalizado -->
+    <script>
+        // Adiciona efeito de scroll suave para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Adiciona classe ativa ao link da navbar correspondente à página atual
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentLocation = location.pathname;
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+            navLinks.forEach(link => {
+                if(link.getAttribute('href') === currentLocation) {
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                }
+            });
+        });
+    </script>
     {% block extra_js %}{% endblock %}
 </body>
 </html>

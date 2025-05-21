@@ -53,6 +53,103 @@
     .card-title {
         color: var(--primary-red);
     }
+    
+    /* Estilização da tabela de resultados */
+    .results-table {
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+    
+    .results-table .card {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    
+    .results-table .card-header {
+        background: linear-gradient(90deg, var(--primary-red) 0%, var(--dark-red) 100%);
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 1rem 1.5rem;
+    }
+    
+    .results-table table {
+        margin-bottom: 0;
+    }
+    
+    .results-table th {
+        color: var(--primary-red);
+        font-weight: 600;
+        border-bottom: 2px solid var(--primary-red);
+        padding: 1rem;
+    }
+    
+    .results-table td {
+        color: var(--light-gray);
+        padding: 1rem;
+        vertical-align: middle;
+    }
+    
+    .results-table tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background-color 0.2s ease;
+    }
+    
+    .results-table tr:hover {
+        background-color: rgba(230, 0, 0, 0.1);
+    }
+    
+    .results-table .team-logo {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        object-fit: contain;
+    }
+    
+    .results-table .score {
+        font-weight: bold;
+        font-size: 1.1rem;
+        background: linear-gradient(90deg, var(--primary-red) 0%, var(--dark-red) 100%);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 5px;
+        display: inline-block;
+        min-width: 80px;
+        text-align: center;
+    }
+    
+    .results-table .winner {
+        font-weight: bold;
+    }
+    
+    .results-table .date-badge {
+        background-color: var(--dark-gray);
+        color: var(--light-gray);
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+    }
+    
+    .results-table .location {
+        color: var(--light-gray);
+        opacity: 0.8;
+        font-size: 0.9rem;
+    }
+    
+    .view-all-btn {
+        background: linear-gradient(90deg, var(--primary-red) 0%, var(--dark-red) 100%);
+        color: white;
+        border: none;
+        padding: 0.5rem 1.5rem;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .view-all-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
 </style>
 
 <div class="container mt-5">
@@ -80,7 +177,553 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h2 class="card-title">Para Clubes</h2>
-                <p class="card-text" style="color: #fff7f7">Encontre talentos que se encaixam nas necessidades do seu clube e entre em contato diretamente.</p>
+                    <p class="card-text" style="color: #fff7f7">Encontre talentos que se encaixam nas necessidades do seu clube e entre em contato diretamente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Nova seção: Tabela de Resultados dos Jogos do Mês -->
+    <div class="results-table">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0"><i class="fas fa-trophy me-2"></i>Resultados dos Jogos - Maio 2025</h3>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-dark dropdown-toggle" type="button" id="monthDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-calendar-alt me-1"></i> Maio 2025
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="monthDropdown">
+                        <li><a class="dropdown-item" href="#">Abril 2025</a></li>
+                        <li><a class="dropdown-item" href="#">Março 2025</a></li>
+                        <li><a class="dropdown-item" href="#">Fevereiro 2025</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Time da Casa</th>
+                                <th>Resultado</th>
+                                <th>Time Visitante</th>
+                                <th>Local</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="date-badge">
+                                        <i class="far fa-calendar me-1"></i>05/05
+                                    </span>
+                                </td>
+                                <td class="winner">
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    São Paulo Spartans
+                                </td>
+                                <td>
+                                    <span class="score">28 - 14</span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Rio Raptors
+                                </td>
+                                <td>
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Estádio Morumbi
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="date-badge">
+                                        <i class="far fa-calendar me-1"></i>12/05
+                                    </span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Curitiba Crocodiles
+                                </td>
+                                <td>
+                                    <span class="score">17 - 21</span>
+                                </td>
+                                <td class="winner">
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Belo Horizonte Eagles
+                                </td>
+                                <td>
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Arena Paraná
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="date-badge">
+                                        <i class="far fa-calendar me-1"></i>19/05
+                                    </span>
+                                </td>
+                                <td class="winner">
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Brasília Wolves
+                                </td>
+                                <td>
+                                    <span class="score">35 - 10</span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Salvador Sailors
+                                </td>
+                                <td>
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Estádio Nacional
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="date-badge">
+                                        <i class="far fa-calendar me-1"></i>25/05
+                                    </span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Recife Mariners
+                                </td>
+                                <td>
+                                    <span class="score">24 - 24</span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Fortaleza Fighters
+                                </td>
+                                <td>
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Arena Pernambuco
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="date-badge">
+                                        <i class="far fa-calendar me-1"></i>30/05
+                                    </span>
+                                </td>
+                                <td class="winner">
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Porto Alegre Pumas
+                                </td>
+                                <td>
+                                    <span class="score">42 - 21</span>
+                                </td>
+                                <td>
+                                    <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                    Florianópolis Sharks
+                                </td>
+                                <td>
+                                    <span class="location">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Estádio Beira-Rio
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer text-center py-3">
+                <a href="#" class="view-all-btn">
+                    <i class="fas fa-list-ul me-2"></i>Ver todos os resultados
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nova seção: Tabela de Ranking dos Times -->
+    <div class="team-rankings mt-5">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0"><i class="fas fa-ranking-star me-2"></i>Classificação dos Times</h3>
+                <div class="d-flex align-items-center">
+                    <div class="me-2">
+                        <select class="form-select form-select-sm bg-dark text-light border-secondary" id="regionFilter">
+                            <option value="all" selected>Todas as Regiões</option>
+                            <option value="norte">Norte</option>
+                            <option value="nordeste">Nordeste</option>
+                            <option value="centro-oeste">Centro-Oeste</option>
+                            <option value="sudeste">Sudeste</option>
+                            <option value="sul">Sul</option>
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-sm btn-dark dropdown-toggle" type="button" id="seasonDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-calendar-alt me-1"></i> Temporada 2025
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="seasonDropdown">
+                            <li><a class="dropdown-item" href="#">Temporada 2024</a></li>
+                            <li><a class="dropdown-item" href="#">Temporada 2023</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark ranking-table">
+                        <thead>
+                            <tr>
+                                <th width="5%">Pos</th>
+                                <th width="35%">Time</th>
+                                <th width="10%">Pts</th>
+                                <th width="10%">J</th>
+                                <th width="10%">V</th>
+                                <th width="10%">D</th>
+                                <th width="10%">E</th>
+                                <th width="10%">Aproveitamento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rankingTableBody">
+                            <!-- Sudeste -->
+                            <tr class="region-sudeste">
+                                <td class="text-center">
+                                    <span class="position-badge">1</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">São Paulo Spartans</span>
+                                            <span class="region-tag">Sudeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">15</td>
+                                <td class="text-center">6</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 83%;" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">83%</span>
+                                </td>
+                            </tr>
+                            <!-- Sul -->
+                            <tr class="region-sul">
+                                <td class="text-center">
+                                    <span class="position-badge">2</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Porto Alegre Pumas</span>
+                                            <span class="region-tag">Sul</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">13</td>
+                                <td class="text-center">6</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">75%</span>
+                                </td>
+                            </tr>
+                            <!-- Centro-Oeste -->
+                            <tr class="region-centro-oeste">
+                                <td class="text-center">
+                                    <span class="position-badge">3</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Brasília Wolves</span>
+                                            <span class="region-tag">Centro-Oeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">12</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">80%</span>
+                                </td>
+                            </tr>
+                            <!-- Sudeste -->
+                            <tr class="region-sudeste">
+                                <td class="text-center">
+                                    <span class="position-badge">4</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Belo Horizonte Eagles</span>
+                                            <span class="region-tag">Sudeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">10</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">70%</span>
+                                </td>
+                            </tr>
+                            <!-- Nordeste -->
+                            <tr class="region-nordeste">
+                                <td class="text-center">
+                                    <span class="position-badge">5</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Recife Mariners</span>
+                                            <span class="region-tag">Nordeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">8</td>
+                                <td class="text-center">6</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">50%</span>
+                                </td>
+                            </tr>
+                            <!-- Sudeste -->
+                            <tr class="region-sudeste">
+                                <td class="text-center">
+                                    <span class="position-badge">6</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Rio Raptors</span>
+                                            <span class="region-tag">Sudeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">7</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">50%</span>
+                                </td>
+                            </tr>
+                            <!-- Sul -->
+                            <tr class="region-sul">
+                                <td class="text-center">
+                                    <span class="position-badge">7</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Curitiba Crocodiles</span>
+                                            <span class="region-tag">Sul</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">6</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">40%</span>
+                                </td>
+                            </tr>
+                            <!-- Nordeste -->
+                            <tr class="region-nordeste">
+                                <td class="text-center">
+                                    <span class="position-badge">8</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Fortaleza Fighters</span>
+                                            <span class="region-tag">Nordeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">5</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">2</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">33%</span>
+                                </td>
+                            </tr>
+                            <!-- Sul -->
+                            <tr class="region-sul">
+                                <td class="text-center">
+                                    <span class="position-badge">9</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Florianópolis Sharks</span>
+                                            <span class="region-tag">Sul</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">4</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">30%</span>
+                                </td>
+                            </tr>
+                            <!-- Nordeste -->
+                            <tr class="region-nordeste">
+                                <td class="text-center">
+                                    <span class="position-badge">10</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Salvador Sailors</span>
+                                            <span class="region-tag">Nordeste</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">3</td>
+                                <td class="text-center">5</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">20%</span>
+                                </td>
+                            </tr>
+                            <!-- Norte -->
+                            <tr class="region-norte">
+                                <td class="text-center">
+                                    <span class="position-badge">11</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Manaus Jaguars</span>
+                                            <span class="region-tag">Norte</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">3</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">25%</span>
+                                </td>
+                            </tr>
+                            <!-- Norte -->
+                            <tr class="region-norte">
+                                <td class="text-center">
+                                    <span class="position-badge">12</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img src="https://via.placeholder.com/30" alt="Logo" class="team-logo">
+                                        <div>
+                                            <span class="team-name">Belém Titans</span>
+                                            <span class="region-tag">Norte</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-bold">1</td>
+                                <td class="text-center">4</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">3</td>
+                                <td class="text-center">1</td>
+                                <td class="text-center">
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 8%;" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <span class="small">8%</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer py-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <div class="d-flex flex-wrap">
+                            <div class="me-4 mb-2">
+                                <span class="legend-item">
+                                    <span class="legend-color bg-success"></span> Classificados
+                                </span>
+                            </div>
+                            <div class="me-4 mb-2">
+                                <span class="legend-item">
+                                    <span class="legend-color bg-warning"></span> Promovidos
+                                </span>
+                            </div>
+                            <div class="me-4 mb-2">
+                                <span class="legend-item">
+                                    <span class="legend-color bg-danger"></span> Rebaixados
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="#" class="btn btn-primary btn-sm" id="viewAllTeamsBtn">
+                            <i class="fas fa-eye me-2"></i>Ver todos os times
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

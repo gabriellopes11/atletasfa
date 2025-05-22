@@ -1,4 +1,5 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block title %}AtletasBR - Conectando Atletas e Clubes{% endblock %}
 
@@ -343,11 +344,11 @@
     <div class="team-rankings mt-5">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3 class="mb-0"><i class="fas fa-ranking-star me-2"></i>Classificação dos Times</h3>
+                <h3 class="mb-0"><i class="fas fa-trophy me-2"></i>Classificação da Liga - Estilo NFL</h3>
                 <div class="d-flex align-items-center">
                     <div class="me-2">
                         <select class="form-select form-select-sm bg-dark text-light border-secondary" id="regionFilter">
-                            <option value="all" selected>Todas as Regiões</option>
+                            <option value="all" selected>Todas as Conferências</option>
                             <option value="norte">Norte</option>
                             <option value="nordeste">Nordeste</option>
                             <option value="centro-oeste">Centro-Oeste</option>
@@ -372,13 +373,15 @@
                         <thead>
                             <tr>
                                 <th width="5%">Pos</th>
-                                <th width="35%">Time</th>
-                                <th width="10%">Pts</th>
-                                <th width="10%">J</th>
-                                <th width="10%">V</th>
-                                <th width="10%">D</th>
-                                <th width="10%">E</th>
-                                <th width="10%">Aproveitamento</th>
+                                <th width="30%">Time</th>
+                                <th width="8%">V-D-E</th>
+                                <th width="8%">PCT</th>
+                                <th width="8%">PF</th>
+                                <th width="8%">PC</th>
+                                <th width="8%">DIFF</th>
+                                <th width="8%">CASA</th>
+                                <th width="8%">FORA</th>
+                                <th width="9%">CONF</th>
                             </tr>
                         </thead>
                         <tbody id="rankingTableBody">
@@ -396,17 +399,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">15</td>
-                                <td class="text-center">6</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 83%;" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">83%</span>
-                                </td>
+                                <td class="text-center">5-1-0</td>
+                                <td class="text-center fw-bold">.833</td>
+                                <td class="text-center">168</td>
+                                <td class="text-center">102</td>
+                                <td class="text-center text-success">+66</td>
+                                <td class="text-center">3-0</td>
+                                <td class="text-center">2-1</td>
+                                <td class="text-center">3-0</td>
                             </tr>
                             <!-- Sul -->
                             <tr class="region-sul">
@@ -422,17 +422,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">13</td>
-                                <td class="text-center">6</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">75%</span>
-                                </td>
+                                <td class="text-center">4-1-1</td>
+                                <td class="text-center fw-bold">.750</td>
+                                <td class="text-center">157</td>
+                                <td class="text-center">98</td>
+                                <td class="text-center text-success">+59</td>
+                                <td class="text-center">3-0</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">2-0</td>
                             </tr>
                             <!-- Centro-Oeste -->
                             <tr class="region-centro-oeste">
@@ -448,17 +445,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">12</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">80%</span>
-                                </td>
+                                <td class="text-center">4-1-0</td>
+                                <td class="text-center fw-bold">.800</td>
+                                <td class="text-center">145</td>
+                                <td class="text-center">92</td>
+                                <td class="text-center text-success">+53</td>
+                                <td class="text-center">2-0</td>
+                                <td class="text-center">2-1</td>
+                                <td class="text-center">2-0</td>
                             </tr>
                             <!-- Sudeste -->
                             <tr class="region-sudeste">
@@ -474,17 +468,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">10</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">70%</span>
-                                </td>
+                                <td class="text-center">3-1-1</td>
+                                <td class="text-center fw-bold">.700</td>
+                                <td class="text-center">132</td>
+                                <td class="text-center">115</td>
+                                <td class="text-center text-success">+17</td>
+                                <td class="text-center">2-0</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">2-1</td>
                             </tr>
                             <!-- Nordeste -->
                             <tr class="region-nordeste">
@@ -500,17 +491,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">8</td>
-                                <td class="text-center">6</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">50%</span>
-                                </td>
+                                <td class="text-center">2-2-2</td>
+                                <td class="text-center fw-bold">.500</td>
+                                <td class="text-center">124</td>
+                                <td class="text-center">128</td>
+                                <td class="text-center text-danger">-4</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">1-1</td>
                             </tr>
                             <!-- Sudeste -->
                             <tr class="region-sudeste">
@@ -526,17 +514,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">7</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">50%</span>
-                                </td>
+                                <td class="text-center">2-2-1</td>
+                                <td class="text-center fw-bold">.500</td>
+                                <td class="text-center">118</td>
+                                <td class="text-center">125</td>
+                                <td class="text-center text-danger">-7</td>
+                                <td class="text-center">1-1</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">1-2</td>
                             </tr>
                             <!-- Sul -->
                             <tr class="region-sul">
@@ -552,17 +537,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">6</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">40%</span>
-                                </td>
+                                <td class="text-center">2-3-0</td>
+                                <td class="text-center fw-bold">.400</td>
+                                <td class="text-center">105</td>
+                                <td class="text-center">118</td>
+                                <td class="text-center text-danger">-13</td>
+                                <td class="text-center">2-1</td>
+                                <td class="text-center">0-2</td>
+                                <td class="text-center">1-2</td>
                             </tr>
                             <!-- Nordeste -->
                             <tr class="region-nordeste">
@@ -578,17 +560,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">5</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">2</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">33%</span>
-                                </td>
+                                <td class="text-center">1-2-2</td>
+                                <td class="text-center fw-bold">.400</td>
+                                <td class="text-center">98</td>
+                                <td class="text-center">112</td>
+                                <td class="text-center text-danger">-14</td>
+                                <td class="text-center">1-1-1</td>
+                                <td class="text-center">0-1-1</td>
+                                <td class="text-center">0-1-1</td>
                             </tr>
                             <!-- Sul -->
                             <tr class="region-sul">
@@ -604,17 +583,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">4</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">30%</span>
-                                </td>
+                                <td class="text-center">1-3-1</td>
+                                <td class="text-center fw-bold">.300</td>
+                                <td class="text-center">92</td>
+                                <td class="text-center">135</td>
+                                <td class="text-center text-danger">-43</td>
+                                <td class="text-center">1-1</td>
+                                <td class="text-center">0-2-1</td>
+                                <td class="text-center">0-2</td>
                             </tr>
                             <!-- Nordeste -->
                             <tr class="region-nordeste">
@@ -630,17 +606,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">3</td>
-                                <td class="text-center">5</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">20%</span>
-                                </td>
+                                <td class="text-center">1-4-0</td>
+                                <td class="text-center fw-bold">.200</td>
+                                <td class="text-center">85</td>
+                                <td class="text-center">142</td>
+                                <td class="text-center text-danger">-57</td>
+                                <td class="text-center">1-2</td>
+                                <td class="text-center">0-2</td>
+                                <td class="text-center">0-2</td>
                             </tr>
                             <!-- Norte -->
                             <tr class="region-norte">
@@ -656,17 +629,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">3</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">25%</span>
-                                </td>
+                                <td class="text-center">1-3-0</td>
+                                <td class="text-center fw-bold">.250</td>
+                                <td class="text-center">78</td>
+                                <td class="text-center">115</td>
+                                <td class="text-center text-danger">-37</td>
+                                <td class="text-center">1-1</td>
+                                <td class="text-center">0-2</td>
+                                <td class="text-center">0-1</td>
                             </tr>
                             <!-- Norte -->
                             <tr class="region-norte">
@@ -682,17 +652,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="text-center fw-bold">1</td>
-                                <td class="text-center">4</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">3</td>
-                                <td class="text-center">1</td>
-                                <td class="text-center">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 8%;" aria-valuenow="8" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="small">8%</span>
-                                </td>
+                                <td class="text-center">0-3-1</td>
+                                <td class="text-center fw-bold">.125</td>
+                                <td class="text-center">65</td>
+                                <td class="text-center">122</td>
+                                <td class="text-center text-danger">-57</td>
+                                <td class="text-center">0-1-1</td>
+                                <td class="text-center">0-2</td>
+                                <td class="text-center">0-1</td>
                             </tr>
                         </tbody>
                     </table>
@@ -700,33 +667,46 @@
             </div>
             <div class="card-footer py-3">
                 <div class="row align-items-center">
-                    <div class="col-md-6 text-center text-md-start">
+                    <div class="col-md-8 text-center text-md-start">
                         <div class="d-flex flex-wrap">
                             <div class="me-4 mb-2">
                                 <span class="legend-item">
-                                    <span class="legend-color bg-success"></span> Classificados
+                                    <span class="legend-color bg-success"></span> Classificados para os playoffs
                                 </span>
                             </div>
                             <div class="me-4 mb-2">
                                 <span class="legend-item">
-                                    <span class="legend-color bg-warning"></span> Promovidos
+                                    <span class="legend-color bg-warning"></span> Wild Card
                                 </span>
                             </div>
                             <div class="me-4 mb-2">
                                 <span class="legend-item">
-                                    <span class="legend-color bg-danger"></span> Rebaixados
+                                    <span class="legend-color bg-danger"></span> Eliminados
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <a href="#" class="btn btn-primary btn-sm" id="viewAllTeamsBtn">
-                            <i class="fas fa-eye me-2"></i>Ver todos os times
-                        </a>
+                    <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
+                        <div class="legend-key small">
+                            <span class="me-2">V-D-E: Vitórias-Derrotas-Empates</span>
+                            <span class="me-2">PCT: Percentual de Vitórias</span>
+                            <span class="me-2">PF: Pontos Feitos</span>
+                            <span class="me-2">PC: Pontos Cedidos</span>
+                            <span class="me-2">DIFF: Diferença de Pontos</span>
+                            <span class="me-2">CONF: Conferência</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/ranking-styles.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/ranking-filter.js' %}"></script>
 {% endblock %}

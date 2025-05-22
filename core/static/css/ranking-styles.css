@@ -1,0 +1,103 @@
+/* Estilos para as regiões */
+.region-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.region-norte .region-tag {
+    background-color: #2E8B57; /* Verde escuro */
+}
+
+.region-nordeste .region-tag {
+    background-color: #FFD700; /* Amarelo */
+    color: #333;
+}
+
+.region-centro-oeste .region-tag {
+    background-color: #6A5ACD; /* Azul-violeta */
+}
+
+.region-sudeste .region-tag {
+    background-color: #FF6347; /* Vermelho-laranja */
+}
+
+.region-sul .region-tag {
+    background-color: #4682B4; /* Azul aço */
+}
+
+/* Estilos para a tabela de ranking */
+.team-rankings {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.team-rankings .card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--primary-red);
+}
+
+.team-rankings .card-header {
+    background: linear-gradient(90deg, var(--primary-red) 0%, var(--dark-red) 100%);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.ranking-table .team-logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.ranking-table .team-name {
+    display: block;
+    font-weight: bold;
+}
+
+.position-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(1) .position-badge,
+tr:nth-child(2) .position-badge,
+tr:nth-child(3) .position-badge,
+tr:nth-child(4) .position-badge {
+    background-color: #28a745; /* Verde para os classificados */
+}
+
+tr:nth-child(5) .position-badge,
+tr:nth-child(6) .position-badge {
+    background-color: #ffc107; /* Amarelo para wild card */
+}
+
+tr:nth-child(n+7) .position-badge {
+    background-color: #dc3545; /* Vermelho para eliminados */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 2px;
+}

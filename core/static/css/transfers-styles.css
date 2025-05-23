@@ -1,0 +1,119 @@
+/* Estilos para a tabela de transferências */
+.transfers-table {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.transfers-table .card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--primary-red);
+}
+
+.transfers-table .card-header {
+    background: linear-gradient(90deg, var(--primary-red) 0%, var(--dark-red) 100%);
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 1rem 1.5rem;
+}
+
+.transfers-table table {
+    margin-bottom: 0;
+}
+
+.transfers-table th {
+    color: var(--primary-red);
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-red);
+    padding: 1rem;
+}
+
+.transfers-table td {
+    color: var(--light-gray);
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.transfers-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.transfers-table tr:hover {
+    background-color: rgba(230, 0, 0, 0.1);
+}
+
+.transfers-table .player-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-red);
+}
+
+.transfers-table .team-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.transfers-table .player-name {
+    display: block;
+    font-weight: bold;
+    color: white;
+}
+
+.transfers-table .position-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.transfers-table .date-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.transfers-table .role-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.transfers-table .role-player {
+    background-color: #007bff;
+    color: white;
+}
+
+.transfers-table .role-coach {
+    background-color: #6c757d;
+    color: white;
+}
+
+.transfers-table .transfer-value {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.transfers-table .card-footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transfers-table .view-all-btn {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.transfers-table .view-all-btn:hover {
+    color: var(--primary-red);
+}

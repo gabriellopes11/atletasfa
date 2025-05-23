@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 
 # Importação dos modelos
-from .models import AthleteProfile, Message, User, VideoPost
+from .models import AthleteProfile, ClubProfile, Message, User, VideoPost
 from .forms import UserRegisterForm, AthleteProfileForm, MessageForm, VideoPostForm
 
 def register(request):
@@ -41,8 +41,13 @@ def dashboard(request):
         )
         return render(request, 'core/dashboard_athlete.html', {'profile': profile})
     elif request.user.is_club:
-        athletes = AthleteProfile.objects.all()
-        return render(request, 'core/dashboard_club.html', {'athletes': athletes})
+        # Solução temporária: não use ClubProfile até que esteja definido
+        # Apenas renderize o template com dados mínimos
+        return render(request, 'core/dashboard_club.html', {
+            'profile': {'name': request.user.username},
+            'athletes': [],
+            'recent_messages': []
+        })
     return redirect('logout')
 
 @login_required

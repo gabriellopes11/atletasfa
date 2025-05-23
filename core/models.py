@@ -1,8 +1,5 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 
 # Usuário customizado
 class User(AbstractUser):
@@ -23,6 +20,19 @@ class AthleteProfile(models.Model):
 
     def __str__(self):
         return self.full_name or self.user.username
+
+# Perfil de clube
+class ClubProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='club_profile')
+    name = models.CharField(max_length=100, blank=True)
+    location = models.CharField(max_length=100, blank=True)
+    founded_year = models.IntegerField(null=True, blank=True)
+    description = models.TextField(blank=True)
+    website = models.URLField(blank=True)
+    logo = models.ImageField(upload_to='club_logos/', null=True, blank=True)
+    
+    def __str__(self):
+        return self.name or self.user.username
 
 # Mensagens entre clubes e atletas
 class Message(models.Model):

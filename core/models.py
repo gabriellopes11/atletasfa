@@ -18,6 +18,16 @@ class AthleteProfile(models.Model):
     video_link = models.URLField(blank=True, default='')
     photo = models.ImageField(upload_to='athletes/', blank=True)
 
+    # Campos novos de exigência contratual
+    desired_salary = models.DecimalField(
+        max_digits=10, decimal_places=2,
+        null=True, blank=True,
+        verbose_name="Salário Desejado (USD)"
+    )
+    needs_housing = models.BooleanField(default=False, verbose_name="Precisa de Moradia")
+    needs_food = models.BooleanField(default=False, verbose_name="Precisa de Alimentação")
+    needs_transport = models.BooleanField(default=False, verbose_name="Precisa de Transporte")
+
     def __str__(self):
         return self.full_name or self.user.username
 
@@ -30,11 +40,11 @@ class ClubProfile(models.Model):
     description = models.TextField(blank=True)
     website = models.URLField(blank=True)
     logo = models.ImageField(upload_to='club_logos/', null=True, blank=True)
-    
+
     def __str__(self):
         return self.name or self.user.username
 
-# Mensagens entre clubes e atletas
+# Mensagens entre usuários
 class Message(models.Model):
     sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, related_name='received_messages', on_delete=models.CASCADE)
@@ -44,6 +54,7 @@ class Message(models.Model):
     def __str__(self):
         return f"De {self.sender} para {self.receiver}"
 
+# Postagem de vídeos
 class VideoPost(models.Model):
     user = models.ForeignKey(User, related_name='videos', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -51,6 +62,6 @@ class VideoPost(models.Model):
     video_url = models.URLField(help_text="URL do YouTube ou Vimeo")
     thumbnail = models.ImageField(upload_to='video_thumbnails/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.title} - {self.user.username}"

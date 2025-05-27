@@ -109,29 +109,102 @@
 
             <!-- Exigências Contratuais -->
             <hr>
-            <h5 class="mb-3">Exigências Contratuais</h5>
+            <div class="card mb-4">
+              <div class="card-header bg-light">
+                <h5 class="mb-0">
+                  <i class="fas fa-file-contract me-2"></i>Exigências Contratuais
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="mb-4">
+                  <label for="{{ form.desired_salary.id_for_label }}" class="form-label">
+                    <i class="fas fa-dollar-sign me-2"></i>Salário Desejado (USD)
+                  </label>
+                  {{ form.desired_salary }}
+                  {% if form.desired_salary.errors %}
+                    <div class="text-danger small">{{ form.desired_salary.errors }}</div>
+                  {% endif %}
+                  <div class="form-text text-muted">
+                    <i class="fas fa-info-circle me-1"></i>Informe o valor mensal desejado em dólares americanos
+                  </div>
+                </div>
 
-            <div class="mb-3">
-              <label for="{{ form.desired_salary.id_for_label }}" class="form-label">Salário Desejado (USD)</label>
-              {{ form.desired_salary }}
-              {% if form.desired_salary.errors %}
-                <div class="text-danger small">{{ form.desired_salary.errors }}</div>
-              {% endif %}
-            </div>
-
-            <div class="form-check mb-2">
-              {{ form.needs_housing }}
-              <label for="{{ form.needs_housing.id_for_label }}" class="form-check-label">Precisa de Moradia</label>
-            </div>
-
-            <div class="form-check mb-2">
-              {{ form.needs_food }}
-              <label for="{{ form.needs_food.id_for_label }}" class="form-check-label">Precisa de Alimentação</label>
-            </div>
-
-            <div class="form-check mb-3">
-              {{ form.needs_transport }}
-              <label for="{{ form.needs_transport.id_for_label }}" class="form-check-label">Precisa de Transporte</label>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Benefício</th>
+                        <th>Opções</th>
+                        <th>Detalhes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="align-middle">
+                          <i class="fas fa-home text-primary me-2"></i>Moradia
+                        </td>
+                        <td class="align-middle">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="housing_none" name="needs_housing" value="none" {% if not form.needs_housing.value %}checked{% endif %}>
+                            <label class="form-check-label" for="housing_none">Não necessário</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="housing_shared" name="needs_housing" value="shared" {% if form.needs_housing.value == 'shared' %}checked{% endif %}>
+                            <label class="form-check-label" for="housing_shared">Compartilhada</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="housing_private" name="needs_housing" value="private" {% if form.needs_housing.value == 'private' %}checked{% endif %}>
+                            <label class="form-check-label" for="housing_private">Privativa</label>
+                          </div>
+                        </td>
+                        <td class="text-muted small">Inclui acomodação durante o contrato</td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="align-middle">
+                          <i class="fas fa-utensils text-primary me-2"></i>Alimentação
+                        </td>
+                        <td class="align-middle">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="food_none" name="needs_food" value="none" {% if not form.needs_food.value %}checked{% endif %}>
+                            <label class="form-check-label" for="food_none">Não necessário</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="food_partial" name="needs_food" value="partial" {% if form.needs_food.value == 'partial' %}checked{% endif %}>
+                            <label class="form-check-label" for="food_partial">Parcial</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="food_full" name="needs_food" value="full" {% if form.needs_food.value == 'full' %}checked{% endif %}>
+                            <label class="form-check-label" for="food_full">Completa</label>
+                          </div>
+                        </td>
+                        <td class="text-muted small">Inclui refeições diárias</td>
+                      </tr>
+                      
+                      <tr>
+                        <td class="align-middle">
+                          <i class="fas fa-bus text-primary me-2"></i>Transporte
+                        </td>
+                        <td class="align-middle">
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="transport_none" name="needs_transport" value="none" {% if not form.needs_transport.value %}checked{% endif %}>
+                            <label class="form-check-label" for="transport_none">Não necessário</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="transport_local" name="needs_transport" value="local" {% if form.needs_transport.value == 'local' %}checked{% endif %}>
+                            <label class="form-check-label" for="transport_local">Local</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="transport_full" name="needs_transport" value="full" {% if form.needs_transport.value == 'full' %}checked{% endif %}>
+                            <label class="form-check-label" for="transport_full">Completo</label>
+                          </div>
+                        </td>
+                        <td class="text-muted small">Inclui deslocamento local</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
             <div class="d-flex justify-content-between mt-4">

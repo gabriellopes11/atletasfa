@@ -25,7 +25,7 @@
                                             {% if user_item.athleteprofile.photo %}
                                                 <img src="{{ user_item.athleteprofile.photo.url }}" alt="{{ user_item.username }}" class="rounded-circle" width="50" height="50">
                                             {% else %}
-                                                <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: #dc3545; color: white;">
+                                                <div class="avatar-placeholder rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background-color: #8c000e; color: white;">
                                                     {{ user_item.username|first|upper }}
                                                 </div>
                                             {% endif %}

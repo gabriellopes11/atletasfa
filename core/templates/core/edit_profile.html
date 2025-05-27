@@ -7,8 +7,10 @@
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      <!-- Card com sombra -->
       <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <!-- Header do card com gradiente vermelho/preto ao invés de bg-danger -->
+        <div class="card-header red-gradient text-white d-flex justify-content-between align-items-center">
           <h4 class="mb-0">Editar Perfil</h4>
           <a href="{% url 'dashboard' %}" class="btn btn-light btn-sm">
             <i class="fas fa-arrow-left me-1"></i>Voltar
@@ -110,7 +112,7 @@
             <!-- Exigências Contratuais -->
             <hr>
             <div class="card mb-4">
-              <div class="card-header bg-light">
+              <div class="card-header red-gradient text-white">
                 <h5 class="mb-0">
                   <i class="fas fa-file-contract me-2"></i>Exigências Contratuais
                 </h5>
@@ -147,7 +149,7 @@
                           <div class="btn-group" role="group">
                             {% for value, label in form.needs_housing.field.choices %}
                               <input type="radio" class="btn-check" name="needs_housing" id="housing_{{ value }}" value="{{ value }}" {% if form.needs_housing.value == value %}checked{% endif %}>
-                              <label class="btn btn-outline-primary" for="housing_{{ value }}">
+                              <label class="btn btn-outline-danger" for="housing_{{ value }}">
                                 {{ label }}
                               </label>
                             {% endfor %}
@@ -164,7 +166,7 @@
                           <div class="btn-group" role="group">
                             {% for value, label in form.needs_food.field.choices %}
                               <input type="radio" class="btn-check" name="needs_food" id="food_{{ value }}" value="{{ value }}" {% if form.needs_food.value == value %}checked{% endif %}>
-                              <label class="btn btn-outline-primary" for="food_{{ value }}">
+                              <label class="btn btn-outline-danger" for="food_{{ value }}">
                                 {{ label }}
                               </label>
                             {% endfor %}
@@ -181,7 +183,7 @@
                           <div class="btn-group" role="group">
                             {% for value, label in form.needs_transport.field.choices %}
                               <input type="radio" class="btn-check" name="needs_transport" id="transport_{{ value }}" value="{{ value }}" {% if form.needs_transport.value == value %}checked{% endif %}>
-                              <label class="btn btn-outline-primary" for="transport_{{ value }}">
+                              <label class="btn btn-outline-danger" for="transport_{{ value }}">
                                 {{ label }}
                               </label>
                             {% endfor %}

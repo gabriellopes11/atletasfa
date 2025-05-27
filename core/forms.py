@@ -29,10 +29,19 @@ class AthleteProfileForm(forms.ModelForm):
             'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 4, 'placeholder': 'Conte um pouco sobre você, sua carreira e objetivos'}),
             'video_link': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://www.youtube.com/watch?v=...'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
-            'desired_salary': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Salário desejado em USD'}),
-            'needs_housing': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-            'needs_food': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
-            'needs_transport': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'desired_salary': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Salário desejado em USD'
+            }),
+            'needs_housing': forms.RadioSelect(attrs={
+                'class': 'form-check-input'
+            }),
+            'needs_food': forms.RadioSelect(attrs={
+                'class': 'form-check-input'
+            }),
+            'needs_transport': forms.RadioSelect(attrs={
+                'class': 'form-check-input'
+            }),
         }
 
 # Formulário para mensagens entre usuários

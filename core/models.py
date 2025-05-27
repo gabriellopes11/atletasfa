@@ -8,6 +8,24 @@ class User(AbstractUser):
 
 # Perfil de atleta
 class AthleteProfile(models.Model):
+    HOUSING_CHOICES = [
+        ('none', 'Não necessário'),
+        ('shared', 'Compartilhada'),
+        ('private', 'Privativa'),
+    ]
+    
+    FOOD_CHOICES = [
+        ('none', 'Não necessário'),
+        ('partial', 'Parcial'),
+        ('full', 'Completa'),
+    ]
+    
+    TRANSPORT_CHOICES = [
+        ('none', 'Não necessário'),
+        ('local', 'Local'),
+        ('full', 'Completo'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100, blank=True, default='')
     position = models.CharField(max_length=50, blank=True, default='')
@@ -18,15 +36,30 @@ class AthleteProfile(models.Model):
     video_link = models.URLField(blank=True, default='')
     photo = models.ImageField(upload_to='athletes/', blank=True)
 
-    # Campos novos de exigência contratual
+    # Campos atualizados de exigência contratual
     desired_salary = models.DecimalField(
         max_digits=10, decimal_places=2,
         null=True, blank=True,
         verbose_name="Salário Desejado (USD)"
     )
-    needs_housing = models.BooleanField(default=False, verbose_name="Precisa de Moradia")
-    needs_food = models.BooleanField(default=False, verbose_name="Precisa de Alimentação")
-    needs_transport = models.BooleanField(default=False, verbose_name="Precisa de Transporte")
+    needs_housing = models.CharField(
+        max_length=10,
+        choices=HOUSING_CHOICES,
+        default='none',
+        verbose_name="Moradia"
+    )
+    needs_food = models.CharField(
+        max_length=10,
+        choices=FOOD_CHOICES,
+        default='none',
+        verbose_name="Alimentação"
+    )
+    needs_transport = models.CharField(
+        max_length=10,
+        choices=TRANSPORT_CHOICES,
+        default='none',
+        verbose_name="Transporte"
+    )
 
     def __str__(self):
         return self.full_name or self.user.username

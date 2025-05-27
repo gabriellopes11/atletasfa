@@ -143,63 +143,51 @@
                         <td class="align-middle">
                           <i class="fas fa-home text-primary me-2"></i>Moradia
                         </td>
-                        <td class="align-middle">
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="housing_none" name="needs_housing" value="none" {% if not form.needs_housing.value %}checked{% endif %}>
-                            <label class="form-check-label" for="housing_none">Não necessário</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="housing_shared" name="needs_housing" value="shared" {% if form.needs_housing.value == 'shared' %}checked{% endif %}>
-                            <label class="form-check-label" for="housing_shared">Compartilhada</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="housing_private" name="needs_housing" value="private" {% if form.needs_housing.value == 'private' %}checked{% endif %}>
-                            <label class="form-check-label" for="housing_private">Privativa</label>
+                        <td>
+                          <div class="btn-group" role="group">
+                            {% for value, label in form.needs_housing.field.choices %}
+                              <input type="radio" class="btn-check" name="needs_housing" id="housing_{{ value }}" value="{{ value }}" {% if form.needs_housing.value == value %}checked{% endif %}>
+                              <label class="btn btn-outline-primary" for="housing_{{ value }}">
+                                {{ label }}
+                              </label>
+                            {% endfor %}
                           </div>
                         </td>
-                        <td class="text-muted small">Inclui acomodação durante o contrato</td>
+                        <td class="text-muted small">Acomodação durante o contrato</td>
                       </tr>
                       
                       <tr>
                         <td class="align-middle">
                           <i class="fas fa-utensils text-primary me-2"></i>Alimentação
                         </td>
-                        <td class="align-middle">
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="food_none" name="needs_food" value="none" {% if not form.needs_food.value %}checked{% endif %}>
-                            <label class="form-check-label" for="food_none">Não necessário</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="food_partial" name="needs_food" value="partial" {% if form.needs_food.value == 'partial' %}checked{% endif %}>
-                            <label class="form-check-label" for="food_partial">Parcial</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="food_full" name="needs_food" value="full" {% if form.needs_food.value == 'full' %}checked{% endif %}>
-                            <label class="form-check-label" for="food_full">Completa</label>
+                        <td>
+                          <div class="btn-group" role="group">
+                            {% for value, label in form.needs_food.field.choices %}
+                              <input type="radio" class="btn-check" name="needs_food" id="food_{{ value }}" value="{{ value }}" {% if form.needs_food.value == value %}checked{% endif %}>
+                              <label class="btn btn-outline-primary" for="food_{{ value }}">
+                                {{ label }}
+                              </label>
+                            {% endfor %}
                           </div>
                         </td>
-                        <td class="text-muted small">Inclui refeições diárias</td>
+                        <td class="text-muted small">Refeições diárias</td>
                       </tr>
                       
                       <tr>
                         <td class="align-middle">
                           <i class="fas fa-bus text-primary me-2"></i>Transporte
                         </td>
-                        <td class="align-middle">
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="transport_none" name="needs_transport" value="none" {% if not form.needs_transport.value %}checked{% endif %}>
-                            <label class="form-check-label" for="transport_none">Não necessário</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="transport_local" name="needs_transport" value="local" {% if form.needs_transport.value == 'local' %}checked{% endif %}>
-                            <label class="form-check-label" for="transport_local">Local</label>
-                          </div>
-                          <div class="form-check form-check-inline">
-                            <input type="radio" class="form-check-input" id="transport_full" name="needs_transport" value="full" {% if form.needs_transport.value == 'full' %}checked{% endif %}>
-                            <label class="form-check-label" for="transport_full">Completo</label>
+                        <td>
+                          <div class="btn-group" role="group">
+                            {% for value, label in form.needs_transport.field.choices %}
+                              <input type="radio" class="btn-check" name="needs_transport" id="transport_{{ value }}" value="{{ value }}" {% if form.needs_transport.value == value %}checked{% endif %}>
+                              <label class="btn btn-outline-primary" for="transport_{{ value }}">
+                                {{ label }}
+                              </label>
+                            {% endfor %}
                           </div>
                         </td>
-                        <td class="text-muted small">Inclui deslocamento local</td>
+                        <td class="text-muted small">Deslocamento local</td>
                       </tr>
                     </tbody>
                   </table>

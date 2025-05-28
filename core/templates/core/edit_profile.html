@@ -28,27 +28,35 @@
             {% csrf_token %}
 
             <!-- Foto -->
-            <div class="row mb-4">
-              <div class="col-md-4 text-center">
-                {% if profile.photo %}
-                  <img src="{{ profile.photo.url }}" class="img-fluid rounded mb-3" alt="{{ profile.full_name }}" style="max-height: 200px;">
-                  <p class="small text-muted">Foto atual</p>
-                {% else %}
-                  <div class="bg-light rounded p-4 mb-3">
-                    <i class="fas fa-user-circle fa-5x text-secondary"></i>
-                  </div>
-                  <p class="small text-muted">Sem foto de perfil</p>
-                {% endif %}
-              </div>
-              <div class="col-md-8">
-                <label for="{{ form.photo.id_for_label }}" class="form-label">Foto de Perfil</label>
-                {{ form.photo }}
-                {% if form.photo.errors %}
-                  <div class="text-danger small">{{ form.photo.errors }}</div>
-                {% endif %}
-                <div class="form-text small text-muted">Formatos aceitos: JPG, PNG. Tamanho máximo: 5MB.</div>
-              </div>
-            </div>
+<div class="row mb-4">
+  <div class="col-md-4 text-center">
+    {% if profile.photo %}
+      <img src="{{ profile.photo.url }}" 
+           class="img-fluid rounded-circle border border-light shadow-sm mb-3" 
+           alt="{{ profile.full_name }}" 
+           style="width: 200px; height: 200px; object-fit: cover;">
+      <p class="small text-muted">Foto atual</p>
+    {% else %}
+      <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" 
+           style="width: 200px; height: 200px;">
+        <i class="fas fa-user-circle fa-5x text-secondary"></i>
+      </div>
+      <p class="small text-muted">Sem foto de perfil</p>
+    {% endif %}
+  </div>
+  
+  <div class="col-md-8">
+    <label for="{{ form.photo.id_for_label }}" class="form-label">Foto de Perfil</label>
+    {{ form.photo }}
+    {% if form.photo.errors %}
+      <div class="text-danger small">{{ form.photo.errors }}</div>
+    {% endif %}
+    <div class="form-text small text-muted">
+      Formatos aceitos: JPG, PNG, GIF, WebP. Tamanho máximo recomendado: 5MB.
+    </div>
+  </div>
+</div>
+
 
            <!-- Dados básicos -->
 <div class="mb-3">

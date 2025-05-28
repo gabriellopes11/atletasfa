@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil de {{ athlete.username }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h2>Perfil de {{ athlete.username }}</h2>
+    <p><strong>Nome completo:</strong> {{ profile.full_name }}</p>
+    <p><strong>Posição:</strong> {{ profile.position }}</p>
+    <p><strong>Idade:</strong> {{ profile.age }}</p>
+    <p><strong>Altura:</strong> {{ profile.height }} m</p>
+    <p><strong>Peso:</strong> {{ profile.weight }} kg</p>
+    {% if profile.photo %}
+        <img src="{{ profile.photo.url }}" alt="Foto de {{ profile.full_name }}" width="200">
+    {% endif %}
+</div>
+{% endblock %}

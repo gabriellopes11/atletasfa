@@ -1,11 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
-# Adicionar a importação da função login
 from django.contrib.auth import login
 
 # Importação dos modelos
@@ -17,7 +16,7 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # Agora a função login está disponível
+            login(request, user)  # Loga o usuário após o registro
             return redirect('dashboard')
     else:
         form = UserRegisterForm()
@@ -26,7 +25,7 @@ def register(request):
 @login_required
 def dashboard(request):
     if request.user.is_athlete:
-        # Usando get_or_create com defaults vazios para evitar erros de NULL
+        # Pega ou cria o perfil de atleta para o usuário logado
         profile, created = AthleteProfile.objects.get_or_create(
             user=request.user,
             defaults={
@@ -41,8 +40,7 @@ def dashboard(request):
         )
         return render(request, 'core/dashboard_athlete.html', {'profile': profile})
     elif request.user.is_club:
-        # Solução temporária: não use ClubProfile até que esteja definido
-        # Apenas renderize o template com dados mínimos
+        # Renderiza dashboard simplificado para clubes (a ajustar conforme necessidade)
         return render(request, 'core/dashboard_club.html', {
             'profile': {'name': request.user.username},
             'athletes': [],
@@ -69,7 +67,7 @@ def edit_profile(request):
 
 @login_required
 def send_message(request, receiver_id):
-    receiver = User.objects.get(id=receiver_id)
+    receiver = get_object_or_404(User, id=receiver_id)
     if request.method == 'POST':
         form = MessageForm(request.POST)
         if form.is_valid():
@@ -110,7 +108,7 @@ class VideoDetailView(DetailView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Adicionar formulário de mensagem ao contexto
+        # Adiciona formulário para envio de mensagem no detalhe do vídeo
         context['message_form'] = MessageForm()
         return context
 
@@ -141,3 +139,22 @@ def post_video(request):
     else:
         form = VideoPostForm()
     return render(request, 'core/post_video.html', {'form': form})
+
+@login_required
+def athlete_profile(request, user_id):
+    """
+    Visualização do perfil do atleta.
+    - Busca o usuário pelo ID.
+    - Se não existir perfil de atleta, mostra mensagem de erro.
+    - Caso contrário, mostra os dados do atleta.
+    """
+    user = get_object_or_404(User, id=user_id)
+
+    # Verifica se o usuário possui perfil de atleta
+    if not hasattr(user, 'athleteprofile'):
+        return render(request, 'core/athlete_profile_not_found.html', {'user': user})
+
+    return render(request, 'core/athlete_profile.html', {
+        'athlete': user,
+        'profile': user.athleteprofile,
+    })

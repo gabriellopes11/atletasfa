@@ -2,6 +2,17 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, AthleteProfile, Message, VideoPost
 
+# Lista de times para o campo team (dropdown)
+TEAM_CHOICES = [
+    ('', 'Selecione o time'),  # opção vazia padrão
+    ('Rondonopolis Hawks', 'Hawks'),
+    ('Cuiabá arsenal', 'Arsenal'),
+    ('Sinop Coyotes', 'Coyotes'),
+    ('Galo', 'Galo'),
+    ('remo', 'Remo'),
+    # Adicione mais times aqui conforme desejar
+]
+
 # Formulário de registro customizado
 class UserRegisterForm(UserCreationForm):
     is_athlete = forms.BooleanField(required=False)
@@ -13,12 +24,20 @@ class UserRegisterForm(UserCreationForm):
 
 # Formulário para editar o perfil do atleta
 class AthleteProfileForm(forms.ModelForm):
+    # Campo novo adicionado para seleção do time atual
+    team = forms.ChoiceField(
+        choices=TEAM_CHOICES,
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
     class Meta:
         model = AthleteProfile
         fields = [
             'full_name', 'position', 'height', 'weight', 'age', 'bio',
             'video_link', 'photo', 'desired_salary', 'needs_housing',
-            'needs_food', 'needs_transport'
+            'needs_food', 'needs_transport',
+            'team',  # Não esquecer de incluir o campo na lista de fields
         ]
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Seu nome completo'}),
@@ -42,6 +61,7 @@ class AthleteProfileForm(forms.ModelForm):
             'needs_transport': forms.RadioSelect(attrs={
                 'class': 'form-check-input'
             }),
+            # Não precisa adicionar widget para team aqui, pois já definido no campo diretamente
         }
 
 # Formulário para mensagens entre usuários

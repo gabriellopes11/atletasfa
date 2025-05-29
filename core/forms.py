@@ -2,6 +2,19 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, AthleteProfile, Message, VideoPost
 
+POSITION_CHOICES = [
+    ('', 'Selecione a posição'),
+    ('RB', 'Running back'),
+    ('WR', 'Wide receiver'),
+    ('OL', 'Offensive lineman'),
+    ('LB', 'Linebacker'),
+    ('ST', 'Safety'),
+    ('CB', 'Cornerback'),
+    ('DL', 'Defensive lineman'),
+    ('QB', 'Quarterback'),
+    ('K', 'Kicker'),
+    ('H', 'Tigh end'),
+]
 # Lista de times para o campo dropdown de seleção
 TEAM_CHOICES = [
     ('', 'Selecione o time'),
@@ -12,6 +25,7 @@ TEAM_CHOICES = [
     ('Remo', 'Remo'),
     # Adicione mais times conforme necessário
 ]
+
 
 # Formulário de registro customizado para o usuário
 class UserRegisterForm(UserCreationForm):
@@ -28,6 +42,13 @@ class AthleteProfileForm(forms.ModelForm):
     # Campo de seleção do time (dropdown)
     team = forms.ChoiceField(
         choices=TEAM_CHOICES,
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    
+    # Campo de seleção da posição (dropdown)
+    position = forms.ChoiceField(
+        choices=POSITION_CHOICES,
         required=True,
         widget=forms.Select(attrs={'class': 'form-control'})
     )

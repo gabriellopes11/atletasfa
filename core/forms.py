@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import User, AthleteProfile, Message, VideoPost
 
 POSITION_CHOICES = [
-    ('', 'Selecione a posição'),
+    ('', 'Selecione a posição'),  # Opção vazia para forçar seleção, pode remover para MultipleChoiceField
     ('RB', 'Running back'),
     ('WR', 'Wide receiver'),
     ('OL', 'Offensive lineman'),
@@ -15,7 +15,7 @@ POSITION_CHOICES = [
     ('K', 'Kicker'),
     ('H', 'Tigh end'),
 ]
-# Lista de times para o campo dropdown de seleção
+
 TEAM_CHOICES = [
     ('', 'Selecione o time'),
     ('Rondonopolis Hawks', 'Hawks'),
@@ -23,9 +23,7 @@ TEAM_CHOICES = [
     ('Sinop Coyotes', 'Coyotes'),
     ('Galo', 'Galo'),
     ('Remo', 'Remo'),
-    # Adicione mais times conforme necessário
 ]
-
 
 # Formulário de registro customizado para o usuário
 class UserRegisterForm(UserCreationForm):
@@ -36,21 +34,20 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2', 'is_athlete', 'is_club']
 
-
 # Formulário para editar o perfil do atleta
 class AthleteProfileForm(forms.ModelForm):
-    # Campo de seleção do time (dropdown)
+    # Campo dropdown para seleção do time (única escolha)
     team = forms.ChoiceField(
         choices=TEAM_CHOICES,
         required=True,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     
-    # Campo de seleção da posição (dropdown)
-    position = forms.ChoiceField(
-        choices=POSITION_CHOICES,
+    # Campo para múltiplas posições: MultipleChoiceField com SelectMultiple (dropdown multi-select)
+    position = forms.MultipleChoiceField(
+        choices=[choice for choice in POSITION_CHOICES if choice[0] != ''],  # removendo opção vazia
         required=True,
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.SelectMultiple(attrs={'class': 'form-control', 'size': '6'})  # size controla altura visual
     )
 
     class Meta:
@@ -62,7 +59,7 @@ class AthleteProfileForm(forms.ModelForm):
         ]
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Seu nome completo'}),
-            'position': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ex: Atacante, Zagueiro, Goleiro'}),
+            # 'position' não deve ter widget aqui, pois já definimos acima
             'height': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01', 'placeholder': 'Ex: 1.85'}),
             'weight': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 75'}),
             'age': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 23'}),
@@ -89,7 +86,6 @@ class AthleteProfileForm(forms.ModelForm):
                 raise forms.ValidationError('A imagem deve ter no máximo 5MB.')
         return photo
 
-
 # Formulário para envio de mensagens entre usuários
 class MessageForm(forms.ModelForm):
     class Meta:
@@ -98,7 +94,6 @@ class MessageForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
         }
-
 
 # Formulário para postagens de vídeo
 class VideoPostForm(forms.ModelForm):

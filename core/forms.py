@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, AthleteProfile, Message, VideoPost
-
+ 
 POSITION_CHOICES = [
     ('', 'Selecione a posição'),  # Opção vazia para forçar seleção, pode remover para MultipleChoiceField
     ('RB', 'Running back'),
@@ -36,12 +36,6 @@ class UserRegisterForm(UserCreationForm):
 
 # Formulário para editar o perfil do atleta
 class AthleteProfileForm(forms.ModelForm):
-    # Campo dropdown para seleção do time (única escolha)
-    team = forms.ChoiceField(
-        choices=TEAM_CHOICES,
-        required=True,
-        widget=forms.Select(attrs={'class': 'form-control'})
-    )
     
     # Campo para múltiplas posições: MultipleChoiceField com SelectMultiple (dropdown multi-select)
     position = forms.MultipleChoiceField(
@@ -59,6 +53,7 @@ class AthleteProfileForm(forms.ModelForm):
         ]
         widgets = {
             'full_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Seu nome completo'}),
+            'team': forms.Select(attrs={'class': 'form-control'}),
             # 'position' não deve ter widget aqui, pois já definimos acima
             'height': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01', 'placeholder': 'Ex: 1.85'}),
             'weight': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Ex: 75'}),
@@ -72,15 +67,10 @@ class AthleteProfileForm(forms.ModelForm):
             'needs_transport': forms.RadioSelect(attrs={'class': 'form-check-input'}),
         }
 
-    # Validação extra para o campo photo (formato + tamanho)
+    # Validação extra para o campo photo (apenas tamanho)
     def clean_photo(self):
         photo = self.cleaned_data.get('photo')
         if photo:
-            valid_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
-            extension = photo.name.split('.')[-1].lower()
-            if extension not in valid_extensions:
-                raise forms.ValidationError('Formato de imagem não suportado. Use JPG, PNG, GIF ou WebP.')
-
             # Limite de tamanho: 5MB (opcional, mas recomendável)
             if photo.size > 5 * 1024 * 1024:
                 raise forms.ValidationError('A imagem deve ter no máximo 5MB.')

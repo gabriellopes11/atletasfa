@@ -122,11 +122,11 @@
     <div class="stat-item mt-3">
         <div class="d-flex justify-content-between mb-1">
             <span class="text-light">Time Atual</span>
-            <span class="text-danger">{{ profile.current_team|default:"Não informado" }}</span>
+            <span class="text-danger">{{ profile.team|default:"Não informado" }}</span>
         </div>
         <div class="progress" style="height: 6px;">
             <div class="progress-bar bg-danger" role="progressbar" 
-                 style="width: {% if profile.current_team %}100{% else %}0{% endif %}%;"
+                 style="width: {% if profile.team %}100{% else %}0{% endif %}%;"
                  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>

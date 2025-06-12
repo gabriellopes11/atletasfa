@@ -11,7 +11,7 @@ class AthleteProfile(models.Model):
     HOUSING_CHOICES = [
         ('none', 'Não necessário'),
         ('shared', 'Compartilhada'),
-        ('private', 'Privativa'),
+        ('private', 'Privativa'), 
     ]
     
     FOOD_CHOICES = [
@@ -26,6 +26,14 @@ class AthleteProfile(models.Model):
         ('full', 'Completo'),
     ]
 
+    TEAM_CHOICES = [
+        ('Rondonopolis Hawks', 'Hawks'),
+        ('Cuiabá Arsenal', 'Arsenal'),
+        ('Sinop Coyotes', 'Coyotes'),
+        ('Galo', 'Galo'),
+        ('Remo', 'Remo'),
+    ]
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=100, blank=True, default='')
     position = models.CharField(max_length=50, blank=True, default='')
@@ -36,7 +44,13 @@ class AthleteProfile(models.Model):
     video_link = models.URLField(blank=True, default='')
     photo = models.ImageField(upload_to='athletes/', blank=True)
 
-    # Campos atualizados de exigência contratual
+    # Novo campo de time
+    team = models.CharField(
+        max_length=100,
+        choices=TEAM_CHOICES,
+        default='Rondonopolis Hawks'
+    )
+
     desired_salary = models.DecimalField(
         max_digits=10, decimal_places=2,
         null=True, blank=True,

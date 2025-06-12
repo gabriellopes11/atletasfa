@@ -5,7 +5,8 @@ from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.shortcuts import get_object_or_404
 
 # Importação dos modelos
 from .models import AthleteProfile, ClubProfile, Message, User, VideoPost
@@ -47,6 +48,37 @@ def dashboard(request):
             'recent_messages': []
         })
     return redirect('logout')
+
+def custom_logout(request):
+    """View personalizada para logout que aceita GET"""
+    logout(request)
+    return redirect('login')
+
+@login_required
+def message_list(request):
+    """Lista todas as mensagens recebidas pelo usuário"""
+    received_messages = Message.objects.filter(receiver=request.user).order_by('-timestamp')
+    sent_messages = Message.objects.filter(sender=request.user).order_by('-timestamp')
+    return render(request, 'core/messages.html', {
+        'received_messages': received_messages,
+        'sent_messages': sent_messages
+    })
+
+@login_required
+def send_message(request):
+    """View para enviar uma nova mensagem"""
+    if request.method == 'POST':
+        form = MessageForm(request.POST, sender=request.user)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = request.user
+            message.save()
+            messages.success(request, 'Mensagem enviada com sucesso!')
+            return redirect('message_list')
+    else:
+        form = MessageForm(sender=request.user)
+    
+    return render(request, 'core/send_message.html', {'form': form})
 
 @login_required
 def edit_profile(request):

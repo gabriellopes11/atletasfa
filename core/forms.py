@@ -1,6 +1,20 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User, AthleteProfile, Message, VideoPost
+
+class MessageForm(forms.ModelForm):
+    """Formulário para envio de mensagens entre usuários"""
+    class Meta:
+        model = Message
+        fields = ['receiver', 'content']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Digite sua mensagem...'}),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        self.sender = kwargs.pop('sender', None)
+        super().__init__(*args, **kwargs)
+        self.fields['receiver'].queryset = User.objects.exclude(id=self.sender.id)
  
 POSITION_CHOICES = [
     ('', 'Selecione a posição'),  # Opção vazia para forçar seleção, pode remover para MultipleChoiceField

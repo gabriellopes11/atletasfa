@@ -1,0 +1,77 @@
+/* Estilos para o formulário de mensagens */
+.message-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.message-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.message-form select,
+.message-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.message-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.message-form button {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-form button:hover {
+    background: #45a049;
+}
+
+/* Estilos para a lista de mensagens */
+.message-list {
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.message {
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.message-sender {
+    font-weight: bold;
+}
+
+.message-date {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.message-content {
+    line-height: 1.5;
+}

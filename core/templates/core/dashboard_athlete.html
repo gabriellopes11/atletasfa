@@ -68,7 +68,12 @@
                         <div class="profile-image-container">
                             {% if profile.photo %}
                                 <!-- Foto do perfil com efeito de borda iluminada -->
-                                <img src="{{ profile.photo.url }}" class="profile-image" alt="{{ profile.full_name }}">
+                                <img src="{{ profile.photo.url }}" 
+                                class="rounded-circle" 
+                                width="150" 
+                                height="150"
+                                style="object-fit: cover;"
+                                alt="Foto do perfil">
                             {% else %}
                                 <!-- Ícone placeholder com efeito de gradiente -->
                                 <div class="profile-image-placeholder">

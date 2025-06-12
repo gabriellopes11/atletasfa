@@ -110,5 +110,10 @@ class VideoPost(models.Model):
     thumbnail = models.ImageField(upload_to='video_thumbnails/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    # Adicionar método save() para verificar
+    def save(self, *args, **kwargs):
+        print(f"Salvando foto em: {self.photo.path}")
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.title} - {self.user.username}"

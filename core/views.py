@@ -154,6 +154,8 @@ def athlete_profile(request, user_id):
     if not hasattr(user, 'athleteprofile'):
         return render(request, 'core/athlete_profile_not_found.html', {'user': user})
 
+    # Adicionar logging para verificar o upload
+    print(f"Arquivo recebido: {request.FILES.get('photo')}")
     return render(request, 'core/athlete_profile.html', {
         'athlete': user,
         'profile': user.athleteprofile,

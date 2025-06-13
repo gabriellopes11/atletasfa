@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+# Usuário customizado
+class User(AbstractUser):
+    is_athlete = models.BooleanField(default=False)
+
 class Message(models.Model):
     """Modelo para mensagens entre usuários"""
     sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.CASCADE)
@@ -14,11 +18,6 @@ class Message(models.Model):
         
     def __str__(self):
         return f"De {self.sender} para {self.receiver} - {self.timestamp}"
-
-# Usuário customizado
-class User(AbstractUser):
-    is_athlete = models.BooleanField(default=False)
-    is_club = models.BooleanField(default=False)
 
 # Perfil de atleta
 class AthleteProfile(models.Model):
